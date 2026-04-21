@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Orders from "./Orders";
-import OrderDetails from "./OrderDetails";
-import Filter from "./Filter";
-import Stats from "./Stats";
+
+import Orders from "./pages/Orders.jsx";
+import OrderDetails from "./pages/OrderDetails.jsx";
+import Filter from "./pages/Filter.jsx";
+import Stats from "./pages/Stats.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Orders />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/orders/:id" element={<OrderDetails />} />
         <Route path="/filter" element={<Filter />} />
