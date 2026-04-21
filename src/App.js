@@ -7,13 +7,13 @@ import Stats from "./pages/Stats";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/orders/:id" element={<OrderDetails />} />
-        <Route path="/filter" element={<Filter />} />
-        <Route path="/stats" element={<Stats />} />
-      </Routes>
-    </BrowserRouter>
+  <Routes>
+    <Route path="/orders" element={<Orders />} />
+    <Route path="/orders/:id" element={<OrderDetails />} />
+    <Route path="/filter" element={<Filter />} />
+    <Route path="/stats" element={<Stats />} />
+  </Routes>
+</BrowserRouter>
   );
 }
 
