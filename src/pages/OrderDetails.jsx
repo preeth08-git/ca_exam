@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
-import { AppContext } from "../context/AppContext";
-
+import { AppContext } from "../context/AppContext.jsx";
 function OrderDetails() {
   const { id } = useParams();
   const { state } = useContext(AppContext);

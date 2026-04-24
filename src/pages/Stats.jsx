@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext";
-
+import { AppContext } from "../context/AppContext.jsx";
 function Stats() {
   const { state } = useContext(AppContext);
 
