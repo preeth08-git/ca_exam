@@ -15,9 +15,7 @@ export default function Filter() {
     const fetchOrders = async () => {
       dispatch({ type: "SET_LOADING", payload: true });
       try {
-        const res = await fetch(`${API_URL}/orders`, {
-          headers: { password: PASSWORD },
-        });
+        const res = await fetch(`${API_URL}/orders?password=${PASSWORD}`);
         const data = await res.json();
         const orders = Array.isArray(data) ? data : data.orders || [];
         setAllOrders(orders);
