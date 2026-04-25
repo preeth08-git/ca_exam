@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext.jsx";
 
-const res = await fetch(`${API_URL}/orders?password=${PASSWORD}`);
+const API_URL = "https://t4e-testserver.onrender.com/api";
 const PASSWORD = "562527";
 
 export default function Orders() {
