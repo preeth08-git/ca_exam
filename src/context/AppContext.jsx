@@ -3,22 +3,19 @@ import { createContext, useReducer } from "react";
 export const AppContext = createContext();
 
 const initialState = {
-  orders: []
+  orders: [],
+  loading: false,
+  error: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
     case "SET_ORDERS":
-      return { ...state, orders: action.payload };
-
-    case "FILTER_ORDERS":
-      return {
-        ...state,
-        orders: state.orders.filter(o =>
-          o.customerName.toLowerCase().includes(action.payload.toLowerCase())
-        )
-      };
-
+      return { ...state, orders: action.payload, loading: false, error: null };
+    case "SET_ERROR":
+      return { ...state, error: action.payload, loading: false };
     default:
       return state;
   }

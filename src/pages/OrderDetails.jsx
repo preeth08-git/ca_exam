@@ -1,22 +1,49 @@
-import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import { AppContext } from "../context/AppContext.jsx";
-function OrderDetails() {
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+const API_URL = "https://t4e-testserver.onrender.com/api";
+const PASSWORD = "562527";
+
+export default function OrderDetails() {
   const { id } = useParams();
-  const { state } = useContext(AppContext);
+  const navigate = useNavigate();
+  const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const order = state.orders.find(o => o.orderId === Number(id));
+  useEffect(() => {
+    const fetchOrder = async () => {
+      try {
+        const res = await fetch(`${API_URL}/orders/${id}`, {
+          headers: { password: PASSWORD },
+        });
+        const data = await res.json();
+        setOrder(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrder();
+  }, [id]);
 
-  if (!order) return <p>Order not found</p>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">Error: {error}</div>;
+  if (!order) return <div className="error">Order not found</div>;
 
   return (
-    <div>
-      <h2>{order.customerName}</h2>
-      <p>{order.restaurant}</p>
-      <p>Status: {order.status}</p>
-      <p>Total: ₹{order.totalAmount}</p>
+    <div className="page">
+      <button className="back-btn" onClick={() => navigate("/orders")}>← Back</button>
+      <h1>Order Details</h1>
+      <div className="detail-card">
+        {Object.entries(order).map(([key, value]) => (
+          <div key={key} className="detail-row">
+            <span className="detail-key">{key}</span>
+            <span className="detail-value">{String(value)}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
-export default OrderDetails;
